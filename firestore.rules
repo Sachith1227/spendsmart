@@ -5,6 +5,8 @@ service cloud.firestore {
     function signedIn() { return request.auth != null; }
     function isOwner(uid) { return signedIn() && request.auth.uid == uid; }
     function validName(n) { return n is string && n.size() >= 1 && n.size() <= 50; }
+    function validText(t, max) { return t is string && t.size() <= max; }
+    function validAmount(a) { return a is number && a >= 0 && a < 1000000000000; }
     function validPhoto(p) { return p == null || (p is string && p.size() <= 2048); }
 
     match /users/{uid} {
@@ -32,6 +34,41 @@ service cloud.firestore {
         && request.resource.data.updatedAt == request.time;
 
       allow delete: if false;
+
+      // Each user's own finance data. Amounts must be valid numbers.
+      match /transactions/{id} {
+        allow read, delete: if isOwner(uid);
+        allow create, update: if isOwner(uid)
+          && request.resource.data.keys().hasOnly(
+               ['title', 'category', 'amount', 'date', 'kind', 'notes', 'paymentMethod', 'recurring', 'recurringSourceId'])
+          && validText(request.resource.data.title, 100)
+          && validText(request.resource.data.category, 50)
+          && validAmount(request.resource.data.amount)
+          && request.resource.data.date is timestamp
+          && request.resource.data.kind in ['expense', 'income', 'transfer']
+          && request.resource.data.notes is string && request.resource.data.notes.size() <= 500
+          && validText(request.resource.data.paymentMethod, 50)
+          && request.resource.data.recurring is bool;
+      }
+
+      match /budgets/{id} {
+        allow read, delete: if isOwner(uid);
+        allow create, update: if isOwner(uid)
+          && request.resource.data.keys().hasOnly(['name', 'category', 'limit'])
+          && validText(request.resource.data.name, 50)
+          && validText(request.resource.data.category, 50)
+          && validAmount(request.resource.data.limit);
+      }
+
+      match /goals/{id} {
+        allow read, delete: if isOwner(uid);
+        allow create, update: if isOwner(uid)
+          && request.resource.data.keys().hasOnly(['title', 'target', 'saved', 'iconIndex'])
+          && validText(request.resource.data.title, 50)
+          && validAmount(request.resource.data.target)
+          && validAmount(request.resource.data.saved)
+          && request.resource.data.iconIndex is int;
+      }
     }
 
     // Deny everything else by default.

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'screens/auth/auth_gate.dart';
-import 'theme/app_theme.dart';
+import 'package:spendsmart/features/auth/screens/auth_gate.dart';
+import 'package:spendsmart/core/theme/app_theme.dart';
 
 class SpendSmartApp extends StatelessWidget {
   const SpendSmartApp({super.key});

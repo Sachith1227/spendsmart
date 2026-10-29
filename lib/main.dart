@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 
-import 'app.dart';
-import 'firebase_options.dart';
+import 'package:spendsmart/app.dart';
+import 'package:spendsmart/firebase_options.dart';
 
-export 'app.dart';
+export 'package:spendsmart/app.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
