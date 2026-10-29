@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'screens/spend_smart_shell.dart';
+import 'screens/auth/auth_gate.dart';
 import 'theme/app_theme.dart';
 
 class SpendSmartApp extends StatelessWidget {
@@ -12,7 +12,7 @@ class SpendSmartApp extends StatelessWidget {
       title: 'SpendSmart',
       debugShowCheckedModeBanner: false,
       theme: buildAppTheme(),
-      home: const SpendSmartShell(),
+      home: const AuthGate(),
     );
   }
 }

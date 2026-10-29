@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../models/spend_transaction.dart';
+import '../services/auth_service.dart';
 import '../state/app_state.dart';
 import '../theme/app_colors.dart';
 import '../widgets/common.dart';
@@ -22,6 +23,13 @@ class SpendSmartShell extends StatefulWidget {
 class _SpendSmartShellState extends State<SpendSmartShell> {
   final _state = AppState();
   int _selectedIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    final name = AuthService.instance.currentUser?.displayName;
+    if (name != null && name.isNotEmpty) _state.userName = name;
+  }
 
   @override
   void dispose() {

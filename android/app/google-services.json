@@ -12,7 +12,20 @@
           "package_name": "com.example.spendsmart"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "40312023826-mmf5nja6k9npf1l8l1dsdckm0kot5gos.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.spendsmart",
+            "certificate_hash": "91c33355f4557afbc5b34307ab6d9247845cea5f"
+          }
+        },
+        {
+          "client_id": "40312023826-qqd5llo6j9np222irjsd1pe1lmac3646.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyClR7I_yU3W651ja3IsI7-3wAyHpzXdCaw"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "40312023826-qqd5llo6j9np222irjsd1pe1lmac3646.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "40312023826-ev1medrvkmhtrv2e59uj5n6vegq9cs7l.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.spendsmart"
+              }
+            }
+          ]
         }
       }
     }
